@@ -1,0 +1,21 @@
+---
+- hosts: all
+  sudo: yes
+  vars:
+    - user_name: UserTest
+    - github_name: UserGit
+
+#Create user and generate ssh-keys
+  tasks:
+    - name: create user
+      user: name={{ user_name }} shell=/bin/bash
+    - name: create ssh dir
+      file: path=/home/{{ user_name }}/.ssh state=directory
+    - name: Generate /home/{{ user_name }}/.ssh RSA key
+      command : ssh-keygen -t rsa -f /home/{{ user_name }}/.ssh/id_rsa -C "" -N ""
+      args:
+        creates: /home/{{ user_name }}/.ssh/id_rsa
+    - name: chown and chmod of ssh dir
+      file: path=/home/{{ user_name }}/.ssh recurse=yes
+            owner={{ user_name }} group={{ user_name }} mode=0700
+            state=directory

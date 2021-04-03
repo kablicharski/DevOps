@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: False
+ 
+  tasks:
+    - name: Create GitLab Project
+      community.general.gitlab_project:
+        api_url: https://gitlab.test123.com/
+        api_token: "{{ api_token }}"
+        name: my_first_project
+        group: "10481470"

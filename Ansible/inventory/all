@@ -1,0 +1,2 @@
+[centOS]
+190.168.0.103 ansible_ssh_pass=centos ansible_ssh_user=root

@@ -1,0 +1,53 @@
+---
+- hosts: all
+  vars:
+    file_name: test.txt
+    user_destination: /home/kblicharski/git
+    gather_facts: yes
+
+  tasks:
+    - name: Create test file
+      file:
+        path: /home/kblicharski/{{ file_name }}
+        state: touch
+
+    - name: Create directory
+      file:
+        path: /home/kblicharski/tmp
+        state: directory
+        owner: kblicharski
+        group: kblicharski
+        mode: 0775
+
+    - name: Install Packages
+      yum:  
+        name: "{{ packages }}"
+      become: yes
+      vars:
+        packages:
+        - vim
+        - python3
+
+    - name: Install git
+      yum:
+        name: git
+        state: present
+        update_cache: yes
+
+#Checkout git repository
+    - name: Clone a repository
+      git:
+        repo: https://github.com/kablicharski/DevOps.git
+        dest: "{{ user_destination }}"
+
+#Check whether repository exists
+    - git:
+        repo: https://github.com/kablicharski/DevOps.git
+        dest: "{{ user_destination }}"
+        update: no
+
+# Example Create git archive from repo
+    - git:
+        repo: 'https://github.com/kablicharski/DevOps.git'
+        dest: "{{ user_destination }}"
+        archive: /home/kablicharski/tmp/ansible.zip
