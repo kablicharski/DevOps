@@ -23,7 +23,7 @@ Amplify.configure({
   Auth: {
     region: "ca-central-1",
     userPoolId: "ca-central-1_GqRDUgxYl",
-    userPoolWebClientId: "7lug4kdj4j6o4d59t8hrnqpcoj",
+    userPoolWebClientId: "1gs0rpjvvem8kgocmo490rugum",
     oauth: {
       domain: "main.dervrwlcswqy8.amplifyapp.com",
       scope: ["email", "openid", "aws.cognito.signin.user.admin", "profile"],
