@@ -18,3 +18,26 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+Amplify.configure({
+  Auth: {
+    region: "ca-central-1",
+    userPoolId: "ca-central-1_GqRDUgxYl",
+    userPoolWebClientId: "7lug4kdj4j6o4d59t8hrnqpcoj",
+    oauth: {
+      domain: "main.dervrwlcswqy8.amplifyapp.com",
+      scope: ["email", "openid", "aws.cognito.signin.user.admin", "profile"],
+      redirectSignIn: "main.dervrwlcswqy8.amplifyapp.com",
+      redirectSignOut: "main.dervrwlcswqy8.amplifyapp.com",
+      responseType: "code"
+    }
+  },
+  API: {
+    endpoints: [
+      {
+        name: "Stage_API",
+        endpoint: "le35b9w0kl.execute-api.ca-central-1.amazonaws.com"
+      }
+    ]
+  }
+});
